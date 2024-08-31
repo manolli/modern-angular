@@ -7,6 +7,8 @@ import { MatOption } from '@angular/material/core';
 import { CurrencyPipe } from '@angular/common';
 import { MatSelect } from '@angular/material/select';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
     selector: 'app-cart-item',
@@ -21,7 +23,7 @@ export class CartItemComponent {
 
   quantityOptions = [1, 2, 3, 4, 5];
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,  public dialog: MatDialog) { }
 
   onQuantityChange(quantity: number, cartItem: CartItem) {
     cartItem.quantity = quantity;
@@ -29,6 +31,14 @@ export class CartItemComponent {
   }
 
   onRemove(): void {
-    this.cartService.removeProduct(this.cartItem.product);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Are you sure you would like to remove this item?'
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.cartService.removeProduct(this.cartItem.product);
+      }
+    });
   }
 }
