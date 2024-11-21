@@ -12,11 +12,10 @@ import { Signal } from '@angular/core';
 import { CartService } from './../../cart/cart.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, RouterLink, MatIconModule, AsyncPipe,MatTooltipModule,CommonModule],
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    imports: [MatToolbarModule, MatButtonModule, RouterLink, MatIconModule, AsyncPipe, MatTooltipModule, CommonModule]
 })
 export class HeaderComponent {
 
