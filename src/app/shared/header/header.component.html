@@ -7,12 +7,19 @@
   <button mat-icon-button [routerLink]="['/products/new']">
     <mat-icon>add</mat-icon>
   </button>
+
+
+
   <button mat-icon-button [routerLink]="['/cart']">
     <mat-icon>shopping_cart</mat-icon>
-    @if (cartCount(); as count) {
-<span class="notification-label">{{
-      count > 0 ? count : ""
-    }}</span>
-}
+    <ng-container *ngIf="cartCount() as count">
+      <span class="notification-label">{{ count > 0 ? count : '' }}</span>
+    </ng-container>
   </button>
+
+  <ng-container *ngIf="cartTotal() as total">
+    <span class="total-amount" [matTooltip]="total | currency : 'USD' : 'symbol-narrow'" matTooltipPosition="above">
+      {{ total | currency : 'USD' : 'symbol-narrow' }}
+    </span>
+  </ng-container>
 </mat-toolbar>
